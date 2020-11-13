@@ -109,6 +109,10 @@ This Billing tool, calculates the amount of bill to be paid by a customer of var
 ### Screenshots
  * All screenshots and images can be found in images folder of the project directory.
  
+### H2 Database console
+ * Console can be accessed at http://localhost:8081/
+ * Username: sa and password: password
+ 
 ### Improvements Areas
    * Dockerization
    * More Validations
