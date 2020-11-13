@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.mukul</groupId>
-	<artifactId>billing_tool-1.0</artifactId>
+	<artifactId>billing_tool</artifactId>
 	<version>0.0.1</version>
-	<name>billing_tool-1.0</name>
+	<name>billing_tool</name>
 	<description>Billing tool 1.0 </description>
 
 	<properties>
