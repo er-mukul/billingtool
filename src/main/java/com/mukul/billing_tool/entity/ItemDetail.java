@@ -4,7 +4,10 @@ import com.mukul.billing_tool.dom.common.DomainDTO;
 import com.mukul.billing_tool.enums.ItemType;
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Getter
 @Setter

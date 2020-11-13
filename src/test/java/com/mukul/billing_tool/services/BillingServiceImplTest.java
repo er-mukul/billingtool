@@ -3,7 +3,6 @@ package com.mukul.billing_tool.services;
 import com.mukul.billing_tool.entity.Customer;
 import com.mukul.billing_tool.entity.ItemDetail;
 import com.mukul.billing_tool.enums.CustomerType;
-import com.mukul.billing_tool.enums.ItemType;
 import com.mukul.billing_tool.helper.DTOHelper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,10 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 @DisplayName("Unit Tests- BillingServiceImpl Test")
 class BillingServiceImplTest {
     @InjectMocks

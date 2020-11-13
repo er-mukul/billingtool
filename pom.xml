@@ -69,6 +69,62 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>**/*Test.*</exclude>
+						<exclude>**/*Application.*</exclude>
+						<exclude>**/*Bean.*</exclude>
+						<exclude>**/*DAO.*</exclude>
+						<exclude>**/*DTO.*</exclude>
+						<exclude>**/dto/**/*.*</exclude>
+						<exclude>**/dto/*.*</exclude>
+						<exclude>**/*Config*.*</exclude>
+						<exclude>**/*Exception.*</exclude>
+						<exclude>**/*Builder.*</exclude>
+						<exclude>**/*Repository.*</exclude>
+						<exclude>**/*Router.*</exclude>
+						<exclude>**/entity/*.*</exclude>
+						<exclude>**/dom/**/*.*</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>jacoco-check</id>
+						<goals>
+							<goal>check</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<rule>
+									<element>PACKAGE</element>
+									<limits>
+										<limit>
+											<counter>LINE</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>0.10</minimum>
+										</limit>
+									</limits>
+								</rule>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
