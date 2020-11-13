@@ -1,4 +1,4 @@
-This _Covid Tracker_ , I have created is buy usinj Java 8 and Spring Web Flux.
+This Billing tool, I have created is buy usinj Java 8 and Spring Web Flux.
 
 I've done basic api implementation with a Sample Junit5 test.
 
