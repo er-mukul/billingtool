@@ -5,20 +5,20 @@ import org.springframework.http.HttpStatus;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-public class ClientException {
-    private static final String message404 = "Resource not available. Kindly check the URL";
-    private static final String messageDefault = "Unhandled Client Exception.";
+public class ClientExceptionMessaging {
+    private static final String MESSAGE_404 = "Resource not available. Kindly check the URL";
+    private static final String MESSAGE_DEFAULT = "Unhandled Client Exception.";
 
-    public static Supplier<ClientException> builder = ClientException::new;
+    public static Supplier<ClientExceptionMessaging> builder = ClientExceptionMessaging::new;
     private String message;
     private HttpStatus httpStatus;
 
-    public ClientException withMessage(final String message){
+    public ClientExceptionMessaging withMessage(final String message){
         this.message = message;
         return this;
     }
 
-    public ClientException withStatus(final HttpStatus httpStatus){
+    public ClientExceptionMessaging withStatus(final HttpStatus httpStatus){
         this.httpStatus = httpStatus;
         return this;
     }
@@ -29,9 +29,9 @@ public class ClientException {
         targetEx.setMessage(Optional
                 .ofNullable(message)
                 .orElseGet(() -> {
-                    String messageTemp = messageDefault;
+                    String messageTemp = MESSAGE_DEFAULT;
                     if(httpStatus==HttpStatus.NOT_FOUND){
-                        messageTemp = message404;
+                        messageTemp = MESSAGE_404;
                     }
                     return messageTemp;
                 }));

@@ -2,8 +2,8 @@ package com.mukul.billing_tool.services;
 
 import com.mukul.billing_tool.entity.Customer;
 import com.mukul.billing_tool.entity.ItemDetail;
-import com.mukul.billing_tool.enums.CustomerType;
-import com.mukul.billing_tool.enums.ItemType;
+import com.mukul.billing_tool.enums.CustomerTypeEnum;
+import com.mukul.billing_tool.enums.ItemTypeEnum;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -19,8 +19,8 @@ public class BillingServiceImpl implements BillingService {
         double groceryAmount;
         double nonGroceryAmount;
 
-        groceryAmount = itemDetailList.stream().filter(itemDetail -> ItemType.GROCERY.equals(itemDetail.getItemType())).mapToDouble(itemDetail -> itemDetail.getItemPrice() * itemDetail.getQuantity()).sum();
-        nonGroceryAmount = itemDetailList.stream().filter(itemDetail -> !ItemType.GROCERY.equals(itemDetail.getItemType())).mapToDouble(itemDetail -> itemDetail.getItemPrice() * itemDetail.getQuantity()).sum();
+        groceryAmount = itemDetailList.stream().filter(itemDetail -> ItemTypeEnum.GROCERY.equals(itemDetail.getItemType())).mapToDouble(itemDetail -> itemDetail.getItemPrice() * itemDetail.getQuantity()).sum();
+        nonGroceryAmount = itemDetailList.stream().filter(itemDetail -> !ItemTypeEnum.GROCERY.equals(itemDetail.getItemType())).mapToDouble(itemDetail -> itemDetail.getItemPrice() * itemDetail.getQuantity()).sum();
 
         double amountAfterPercentageDiscount = groceryAmount + nonGroceryAmount - nonGroceryAmount*discountPercentage;
 
@@ -33,12 +33,12 @@ public class BillingServiceImpl implements BillingService {
         double discountPercentage = 0d;
         Period loyaltyPeriod = Period.between(customer.getJoiningDate(), LocalDate.now());
 
-        if(CustomerType.Employee.equals(customer.getCustomerType())){
-            discountPercentage = CustomerType.Employee.getDiscount();
-        } else if(CustomerType.Affiliate.equals(customer.getCustomerType())){
-            discountPercentage = CustomerType.Affiliate.getDiscount();
+        if(CustomerTypeEnum.EMPLOYEE.equals(customer.getCustomerType())){
+            discountPercentage = CustomerTypeEnum.EMPLOYEE.getDiscount();
+        } else if(CustomerTypeEnum.AFFILIATE.equals(customer.getCustomerType())){
+            discountPercentage = CustomerTypeEnum.AFFILIATE.getDiscount();
         } else if(loyaltyPeriod.getYears() > 2){
-            discountPercentage = CustomerType.LOYALTY.getDiscount();
+            discountPercentage = CustomerTypeEnum.LOYALTY.getDiscount();
         }
 
         return discountPercentage;

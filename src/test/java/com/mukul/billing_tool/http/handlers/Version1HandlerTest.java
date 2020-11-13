@@ -4,8 +4,8 @@ import com.mukul.billing_tool.dom.common.BeanValidation;
 import com.mukul.billing_tool.dto.BillDetail;
 import com.mukul.billing_tool.entity.Customer;
 import com.mukul.billing_tool.entity.ItemDetail;
-import com.mukul.billing_tool.enums.CustomerType;
-import com.mukul.billing_tool.exception.ClientException;
+import com.mukul.billing_tool.enums.CustomerTypeEnum;
+import com.mukul.billing_tool.exception.ClientExceptionMessaging;
 import com.mukul.billing_tool.exception.GenericException;
 import com.mukul.billing_tool.helper.DTOHelper;
 import com.mukul.billing_tool.jpa.CustomerRepository;
@@ -58,7 +58,7 @@ class Version1HandlerTest {
     @Test
     void saveCustomer() {
         Customer mockCustomer = Customer.builder().id(12l).customerName("TestName")
-                .customerType(CustomerType.Employee).joiningDate(LocalDate.now()).build();
+                .customerType(CustomerTypeEnum.EMPLOYEE).joiningDate(LocalDate.now()).build();
         doReturn(Mono.just(mockCustomer))
                 .when(serverRequest).bodyToMono(Customer.class);
         doReturn(mockCustomer).when(beanValidation).dtoValidation(any());
@@ -75,11 +75,11 @@ class Version1HandlerTest {
 
     @Test
     void saveCustomerErrorCase() {
-        Customer mockCustomer = DTOHelper.createCustomer(CustomerType.Employee,LocalDate.now());
+        Customer mockCustomer = DTOHelper.createCustomer(CustomerTypeEnum.EMPLOYEE,LocalDate.now());
         doReturn(Mono.just(mockCustomer))
                 .when(serverRequest).bodyToMono(Customer.class);
         doReturn(mockCustomer).when(beanValidation).dtoValidation(any());
-        doReturn(Mono.error(ClientException.builder
+        doReturn(Mono.error(ClientExceptionMessaging.builder
         .get().withStatus(HttpStatus.INTERNAL_SERVER_ERROR).build())).when(customerRepository).save(any());
 
         StepVerifier.create(version1Handler.saveCustomer(serverRequest))
@@ -89,7 +89,7 @@ class Version1HandlerTest {
 
     @Test
     void generateBill() {
-        Customer mockCustomer = DTOHelper.createCustomer(CustomerType.Employee,LocalDate.now());
+        Customer mockCustomer = DTOHelper.createCustomer(CustomerTypeEnum.EMPLOYEE,LocalDate.now());
         List<ItemDetail> itemDetailList = DTOHelper.createList();
         BillDetail billDetail = DTOHelper.getBillDetail();
 
@@ -112,11 +112,11 @@ class Version1HandlerTest {
 
     @Test
     void generateBillgivesError() {
-        Customer mockCustomer = DTOHelper.createCustomer(CustomerType.Employee,LocalDate.now());
+        Customer mockCustomer = DTOHelper.createCustomer(CustomerTypeEnum.EMPLOYEE,LocalDate.now());
         List<ItemDetail> itemDetailList = DTOHelper.createList();
         BillDetail billDetail = DTOHelper.getBillDetail();
 
-        doReturn(Mono.error(ClientException.builder
+        doReturn(Mono.error(ClientExceptionMessaging.builder
                 .get().withStatus(HttpStatus.INTERNAL_SERVER_ERROR).build()))
                 .when(serverRequest).bodyToMono(BillDetail.class);
         doReturn(billDetail).when(beanValidation).dtoValidation(any());

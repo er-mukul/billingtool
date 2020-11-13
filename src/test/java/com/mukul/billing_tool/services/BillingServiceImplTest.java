@@ -2,7 +2,7 @@ package com.mukul.billing_tool.services;
 
 import com.mukul.billing_tool.entity.Customer;
 import com.mukul.billing_tool.entity.ItemDetail;
-import com.mukul.billing_tool.enums.CustomerType;
+import com.mukul.billing_tool.enums.CustomerTypeEnum;
 import com.mukul.billing_tool.helper.DTOHelper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,7 +25,7 @@ class BillingServiceImplTest {
 
     @Test
     void calculateBillAmountForEmployee() {
-        Customer customer = DTOHelper.createCustomer(CustomerType.Employee, LocalDate.now());
+        Customer customer = DTOHelper.createCustomer(CustomerTypeEnum.EMPLOYEE, LocalDate.now());
         List<ItemDetail> itemDetailList = DTOHelper.createList();
 
         double billAmount = billingService.calculateBillAmount(customer,itemDetailList);
@@ -34,7 +34,7 @@ class BillingServiceImplTest {
 
     @Test
     void calculateBillAmountForAffiliate() {
-        Customer customer = DTOHelper.createCustomer(CustomerType.Affiliate, LocalDate.now());
+        Customer customer = DTOHelper.createCustomer(CustomerTypeEnum.AFFILIATE, LocalDate.now());
         List<ItemDetail> itemDetailList = DTOHelper.createList();
 
         double billAmount = billingService.calculateBillAmount(customer,itemDetailList);
@@ -43,7 +43,7 @@ class BillingServiceImplTest {
 
     @Test
     void calculateBillAmountForLoyalty() {
-        Customer customer = DTOHelper.createCustomer(CustomerType.LOYALTY, LocalDate.of(2016,11,21));
+        Customer customer = DTOHelper.createCustomer(CustomerTypeEnum.LOYALTY, LocalDate.of(2016,11,21));
         List<ItemDetail> itemDetailList = DTOHelper.createList();
 
         double billAmount = billingService.calculateBillAmount(customer,itemDetailList);
@@ -52,7 +52,7 @@ class BillingServiceImplTest {
 
     @Test
     void calculateBillAmountForGeneral() {
-        Customer customer = DTOHelper.createCustomer(CustomerType.General, LocalDate.now());
+        Customer customer = DTOHelper.createCustomer(CustomerTypeEnum.GENERAL, LocalDate.now());
         List<ItemDetail> itemDetailList = DTOHelper.createList();
 
         double billAmount = billingService.calculateBillAmount(customer,itemDetailList);

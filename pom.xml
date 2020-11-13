@@ -16,6 +16,9 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<sonar.exclusions>**/*Router.*</sonar.exclusions>
+		<sonar.test.exclusions>**/test/*,**/test/**</sonar.test.exclusions>
+		<sonar.coverage.exclusions>**/*Test.*,**/*Application.*,**/*Bean.*,**/*DAO.*,**/*DTO.*,**/dto/**/*.*,**/dto/*.*,**/*Config*.*,**/*Exception.*,**/*Exception*.*,**/*Builder.*,**/*Repository.*,**/*Router.*,**/entity/*.*,**/dom/**/*.*</sonar.coverage.exclusions>
 	</properties>
 
 	<dependencies>
@@ -124,6 +127,10 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>

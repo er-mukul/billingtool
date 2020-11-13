@@ -2,7 +2,7 @@ package com.mukul.billing_tool.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.mukul.billing_tool.dom.common.DomainDTO;
-import com.mukul.billing_tool.enums.CustomerType;
+import com.mukul.billing_tool.enums.CustomerTypeEnum;
 import lombok.*;
 
 import javax.persistence.*;
@@ -29,7 +29,7 @@ public class Customer implements DomainDTO {
 
     @NotNull
     @Column
-    private CustomerType customerType;
+    private CustomerTypeEnum customerType;
 
     @NotNull
     @Column

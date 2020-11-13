@@ -1,7 +1,7 @@
 package com.mukul.billing_tool.entity;
 
 import com.mukul.billing_tool.dom.common.DomainDTO;
-import com.mukul.billing_tool.enums.ItemType;
+import com.mukul.billing_tool.enums.ItemTypeEnum;
 import lombok.*;
 
 import javax.persistence.Column;
@@ -23,7 +23,7 @@ public class ItemDetail implements DomainDTO {
     private String itemName;
 
     @Column
-    private ItemType itemType;
+    private ItemTypeEnum itemType;
 
     @Column
     private double itemPrice;
